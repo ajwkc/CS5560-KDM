@@ -2,12 +2,13 @@ from stanfordcorenlp import StanfordCoreNLP
 
 
 def main():
-    # Server configuration
+
+    # Java server configuration
     host = 'http://localhost'
     port = 9000
     nlp = StanfordCoreNLP(host, port=port, timeout=30000)
 
-    # Sample sentence for parsin
+    # Sample sentence for parsing
     sentence = 'Susan gave me a sandwich, but I did not eat it.'
 
     # Part of Speech Tagging
