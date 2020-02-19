@@ -33,7 +33,7 @@ def main():
     word = wn.synsets("window")
 
     # Print the word
-    print('The word is:' ,word[0].lemmas()[0].name(), '\n')
+    print('The word is:', word[0].lemmas()[0].name(), '\n')
 
     # Definition of the word:
     print('The definition is: ', word[0].definition(), '\n')
@@ -41,7 +41,7 @@ def main():
     # Examples of the word in use in sentences:
     print('Examples of the word:', word[0].examples(), '\n')
 
-    # synonyms and antonyms using wordnet using word
+    # Create empty sets to populate w/ synonyms & antonyms
     synonyms = []
     antonyms = []
 
@@ -50,13 +50,8 @@ def main():
             synonyms.append(l.name())
             if l.antonyms():
                 antonyms.append(l.antonyms()[0].name())
-    print('The synonyms of good are: ')
-    print(set(synonyms))
-    print('\n')
-    print('The antonyms of good are: ')
-    print(set(antonyms))
-    print('\n')
-
+    print('The synonyms of good are: ', set(synonyms), '\n')
+    print('The antonyms of good are: ', set(antonyms), '\n')
 
     print('Set of hyponyms:\n', word[0].hyponyms(), '\n')
     print('Set of hypernyms:\n', word[0].hypernyms(), '\n')
