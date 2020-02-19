@@ -31,8 +31,6 @@ def main():
 
     # WordNet functionality
     word = wn.synsets("window")
-
-    # Print the word
     print('The word is:', word[0].lemmas()[0].name(), '\n')
 
     # Definition of the word:
@@ -45,6 +43,7 @@ def main():
     synonyms = []
     antonyms = []
 
+    # Fill the sets and print them
     for syn in wn.synsets("window"):
         for l in syn.lemmas():
             synonyms.append(l.name())
@@ -53,13 +52,13 @@ def main():
     print('The synonyms of good are: ', set(synonyms), '\n')
     print('The antonyms of good are: ', set(antonyms), '\n')
 
+    # Demonstration of other WordNet features
     print('Set of hyponyms:\n', word[0].hyponyms(), '\n')
     print('Set of hypernyms:\n', word[0].hypernyms(), '\n')
     print('Set of part-meronyms:\n', word[0].part_meronyms(), '\n')
     print('Set of substance-meronyms:\n', word[0].substance_meronyms(), '\n')
     print('Set of member-holonyms:\n', word[0].member_holonyms(), '\n')
     print('Set of part-meronyms:\n', word[0].part_meronyms(), '\n')
-
     print('Entailments of the word Breathe:\n', wn.synset('breathe.v.01').entailments())
 
 
