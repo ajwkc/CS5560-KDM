@@ -30,7 +30,7 @@ def main():
             print(relationSent, "\n\n")
 
     # WordNet functionality
-    word = wn.synsets("worm")
+    word = wn.synsets("window")
 
     # Print the word
     print('The word is:' ,word[0].lemmas()[0].name(), '\n')
@@ -45,7 +45,7 @@ def main():
     synonyms = []
     antonyms = []
 
-    for syn in wn.synsets("good"):
+    for syn in wn.synsets("window"):
         for l in syn.lemmas():
             synonyms.append(l.name())
             if l.antonyms():
