@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import nltk
 import neuralcoref, spacy
 
