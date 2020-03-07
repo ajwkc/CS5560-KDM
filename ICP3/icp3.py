@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import json
 from nltk.corpus import wordnet as wn
 from stanfordcorenlp import StanfordCoreNLP

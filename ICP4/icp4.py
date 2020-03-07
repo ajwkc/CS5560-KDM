@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import pyspark
 from pyspark.sql import SQLContext
 from pyspark import SparkFiles

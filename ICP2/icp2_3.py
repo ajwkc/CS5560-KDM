@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 from pycorenlp import StanfordCoreNLP
 
 # StanfordCoreNLP's Python wrapper doesn't handle sentiment analysis
