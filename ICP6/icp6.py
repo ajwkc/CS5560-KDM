@@ -47,7 +47,7 @@ stemmer = PorterStemmer()
 startTime = time.time()
 df['tokenized_content'] = df['content'].apply(clean)
 stopTime = time.time()
-print('Cleaning & tokenizing', len(df), 'content:', (stopTime - startTime) / 60, 'min\n')
+print('Cleaning & tokenizing', len(df), 'reviews:', (stopTime - startTime) / 60, 'min\n')
 print("Reviews and their tokenized version:")
 print(df.head(5))
 
@@ -60,7 +60,7 @@ dictionary = corpora.Dictionary(tokenized)
 # Filter terms by frequency
 # no_below is min number of doc appearances
 # no_above is max percentage of doc appearances
-dictionary.filter_extremes(no_below=2, no_above=0.75)
+dictionary.filter_extremes(no_below=3, no_above=0.80)
 
 # Convert the dictionary to a bag-of-words corpus
 corpus = [dictionary.doc2bow(tokens) for tokens in tokenized]
@@ -69,10 +69,10 @@ print(corpus[:1])
 print([[(dictionary[idx], freq) for idx, freq in cp] for cp in corpus[:1]])
 
 # LDA
-ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=5, id2word=dictionary, passes=15)
+ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=4, id2word=dictionary, passes=10)
 # saving the model
 ldamodel.save('model_combined.gensim')
-topics = ldamodel.print_topics(num_words=5)
+topics = ldamodel.print_topics(num_words=3)
 print('\n')
 print("Now printing the topics and their composition")
 print("This output shows the Topic-Words matrix for the 7 topics created and the 4 words within each topic")
