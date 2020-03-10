@@ -7,11 +7,13 @@ from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 import pandas as pd
 import numpy as np
+import gensim
+import pyLDAvis.gensim
 
 # read the csv file with amazon reviews
-reviews_df = pd.read_csv('C:/Users/shs6g/Desktop/KDM/code/ICP6/reviews.csv', error_bad_lines=False)
-reviews_df['Reviews'] = reviews_df['Reviews'].astype(str)
-print(reviews_df.head(6))
+content_df = pd.read_csv('/home/andrew/CS5560-KDM/ICP6/reviews.csv', error_bad_lines=False)
+content_df['content'] = content_df['content'].astype(str)
+print(content_df.head(6))
 
 
 def initial_clean(text):
@@ -21,7 +23,7 @@ def initial_clean(text):
     text = re.sub("[^a-zA-Z ]", "", text)
     text = text.lower()  # lower case text
     text = nltk.word_tokenize(text)
-    return (text)
+    return text
 
 
 stop_words = stopwords.words('english')
@@ -64,20 +66,19 @@ def apply_all(text):
 import time
 
 t1 = time.time()
-reviews_df['tokenized_reviews'] = reviews_df['Reviews'].apply(apply_all)
+content_df['tokenized_reviews'] = content_df['content'].apply(apply_all)
 t2 = time.time()
-print("Time to clean and tokenize", len(reviews_df), "reviews:", (t2 - t1) / 60,
+print("Time to clean and tokenize", len(content_df), "content:", (t2 - t1) / 60,
       "min")  # Time to clean and tokenize 3209 reviews: 0.21254388093948365 min
 
 print('\n')
 print("reviews with their respective tokenize version:")
-print(reviews_df.head(5))
+print(content_df.head(5))
 # LDA
-import gensim
-import pyLDAvis.gensim
+
 
 # Create a Gensim dictionary from the tokenized data
-tokenized = reviews_df['tokenized_reviews']
+tokenized = content_df['tokenized_reviews']
 # Creating term dictionary of corpus, where each unique term is assigned an index.
 dictionary = corpora.Dictionary(tokenized)
 # Filter terms which occurs in less than 1 review and more than 80% of the reviews.
@@ -89,10 +90,10 @@ print(corpus[:1])
 print([[(dictionary[id], freq) for id, freq in cp] for cp in corpus[:1]])
 
 # LDA
-ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=7, id2word=dictionary, passes=15)
+ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=5, id2word=dictionary, passes=15)
 # saving the model
 ldamodel.save('model_combined.gensim')
-topics = ldamodel.print_topics(num_words=4)
+topics = ldamodel.print_topics(num_words=5)
 print('\n')
 print("Now printing the topics and their composition")
 print("This output shows the Topic-Words matrix for the 7 topics created and the 4 words within each topic")
@@ -102,7 +103,7 @@ for topic in topics:
 # finding the similarity of the first review with topics
 print('\n')
 print("first review is:")
-print(reviews_df.Reviews[0])
+print(content_df.content[0])
 get_document_topics = ldamodel.get_document_topics(corpus[0])
 print('\n')
 print("The similarity of this review with the topics and respective similarity score are ")

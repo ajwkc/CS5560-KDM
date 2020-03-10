@@ -2,6 +2,7 @@
 *.log
 *.idea
 *.sqlite
+*.gensim.*
 reviews.csv
 venv/
 directories/
