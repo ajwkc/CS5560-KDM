@@ -60,7 +60,7 @@ dictionary = corpora.Dictionary(tokenized)
 # Filter terms by frequency
 # no_below is min number of doc appearances
 # no_above is max percentage of doc appearances
-dictionary.filter_extremes(no_below=3, no_above=0.80)
+dictionary.filter_extremes(no_below=20, no_above=0.25)
 
 # Convert the dictionary to a bag-of-words corpus
 corpus = [dictionary.doc2bow(tokens) for tokens in tokenized]
