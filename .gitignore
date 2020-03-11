@@ -5,6 +5,7 @@
 *.gensim
 *.gensim.*
 reviews.csv
+LDA_Model.py
 venv/
 directories/
 spark-warehouse/
