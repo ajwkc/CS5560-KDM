@@ -12,7 +12,7 @@ abstracts = spark.read.text('abs*.txt')
 tokenizer = Tokenizer(inputCol="value", outputCol="words")
 wordsData = tokenizer.transform(abstracts)
 
-#creating NGrams with n=2 (two words)
+# Creating n-grams with n=5
 ngram = NGram(n=5, inputCol="words", outputCol="ngrams")
 ngramDataFrame = ngram.transform(wordsData)
 
