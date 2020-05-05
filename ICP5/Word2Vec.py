@@ -1,31 +1,27 @@
-from pyspark.sql import SparkSession
+from __future__ import print_function
 from pyspark.ml.feature import Word2Vec
+from pyspark.ml.feature import HashingTF, IDF, Tokenizer, NGram
+from pyspark.sql import SparkSession
 
-# creating spark session
-spark = SparkSession.builder .appName("Ngram Example").getOrCreate()
+# Create the Spark session
+spark = SparkSession.builder.appName("W2V_Easy").getOrCreate()
 
+# Create the dataframe with five text abstracts
+abstracts = spark.read.text('abs*.txt')
 
-# Input data: Each row is a bag of words from a sentence or document.
-documentDF = spark.createDataFrame([
-    ("McCarthy was asked to analyse the data from the first phase of trials of the vaccine.".split(" "), ),
-    ("We have amassed the raw data and are about to begin analysing it.".split(" "), ),
-    ("Without more data we cannot make a meaningful comparison of the two systems.".split(" "), ),
-    ("Collecting data is a painfully slow process.".split(" "), ),
-    ("You need a long series of data to be able to discern such a trend.".split(" "), )
-], ["text"])
+# Tokenize the abstract texts
+tokenizer = Tokenizer(inputCol="value", outputCol="words")
+wordsData = tokenizer.transform(abstracts)
 
-
-# Learn a mapping from words to Vectors.
-word2Vec = Word2Vec(vectorSize=3, minCount=0, inputCol="text", outputCol="result")
-model = word2Vec.fit(documentDF)
+# Create a mapping from words to vectors
+word2Vec = Word2Vec(vectorSize=3, minCount=0, inputCol="words", outputCol="result")
+model = word2Vec.fit(wordsData)
 print(model.getVectors().collect())
 result = model.getVectors().collect()
 
-
-# showing the synonyms and cosine similarity of the word in input data
-synonyms = model.findSynonyms("data", 5)   # its okay for certain words , real bad for others
+# Show the synonyms and cosine similarity of the word in input data
+synonyms = model.findSynonyms("physics", 5)
 synonyms.show(5)
 
-
-#closing the spark session
+# Close the session
 spark.stop()

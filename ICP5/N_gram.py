@@ -1,22 +1,31 @@
+from __future__ import print_function
+from pyspark.ml.feature import HashingTF, IDF, Tokenizer, NGram
 from pyspark.sql import SparkSession
-from pyspark.ml.feature import NGram
 
-# creating spark session
-spark = SparkSession.builder .appName("Ngram Example").getOrCreate()
+# Create the Spark session
+spark = SparkSession.builder.appName("Ngrams").getOrCreate()
 
-#creating dataframe of input
-wordDataFrame = spark.createDataFrame([
-    (0, ["Hi", "I", "heard", "about", "Spark"]),
-    (1, ["I", "wish", "Java", "could", "use", "case", "classes"]),
-    (2, ["Logistic", "regression", "models", "are", "neat"])
-], ["id", "words"])
+# Create the dataframe with five text abstracts
+abstracts = spark.read.text('abs*.txt')
+
+# Tokenize the abstract texts
+tokenizer = Tokenizer(inputCol="value", outputCol="words")
+wordsData = tokenizer.transform(abstracts)
 
 #creating NGrams with n=2 (two words)
-ngram = NGram(n=2, inputCol="words", outputCol="ngrams")
-ngramDataFrame = ngram.transform(wordDataFrame)
+ngram = NGram(n=5, inputCol="words", outputCol="ngrams")
+ngramDataFrame = ngram.transform(wordsData)
 
-# displaying the results
-ngramDataFrame.select("ngrams").show(truncate=False)
+# Apply topic frequency on the abstracts
+hashingTF = HashingTF(inputCol="words", outputCol="rawFeatures", numFeatures=40)
+featurizedData = hashingTF.transform(ngramDataFrame)
 
-#closing the spark session
+# Calculate the inverse document frequency
+idf = IDF(inputCol="rawFeatures", outputCol="features")
+idfModel = idf.fit(featurizedData)
+rescaledData = idfModel.transform(featurizedData)
+
+# Display the results
+rescaledData.select("features").show(20, truncate=False)
+
 spark.stop()

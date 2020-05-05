@@ -12,6 +12,7 @@ import pyLDAvis.gensim
 
 
 def main():
+
     def clean(text):
         '''
         Remove punctuation, capital letters and stopwords from text.
