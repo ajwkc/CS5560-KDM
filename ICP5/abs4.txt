@@ -1,0 +1,8 @@
+The analysis of the Helmholtz equation is shown to lead to an exact Hamiltonian system describing in terms of ray
+trajectories, for a stationary refractive medium, a very wide family of wave-like phenomena (including diffraction and
+interference) going much beyond the limits of the geometrical optics (“eikonal”) approximation, which is contained as a
+simple limiting case. Due to the fact, moreover, that the time independent Schrödinger equation is itself a
+Helmholtz-like equation, the same mathematics holding for a classical optical beam turns out to apply to a quantum
+particle beam moving in a stationary force field, and leads to a system of Hamiltonian equations providing exact and
+deterministic particle trajectories and dynamical laws, and containing the laws of Classical Mechanics in the eikonal
+limit.

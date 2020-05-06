@@ -1,0 +1,10 @@
+Among several possibilities for what reality could be like in view of the empirical facts of quantum mechanics, one is
+provided by theories of spontaneous wave function collapse, the best known of which is the Ghirardi–Rimini–Weber (GRW)
+theory. We show mathematically that in GRW theory (and similar theories) there are limitations to knowledge, that is,
+inhabitants of a GRW universe cannot find out all the facts true of their universe. As a specific example, they cannot
+accurately measure the number of collapses that a given physical system undergoes during a given time interval; in fact,
+they cannot reliably measure whether one or zero collapses occur. Put differently, in a GRW universe certain meaningful,
+factual questions are empirically undecidable. We discuss several types of limitations to knowledge and compare them
+with those in other (no-collapse) versions of quantum mechanics, such as Bohmian mechanics. Most of our results also
+apply to observer-induced collapses as in orthodox quantum mechanics (as opposed to the spontaneous collapses of GRW
+theory).

@@ -1,0 +1,7 @@
+In describing the charge carriers' separation mechanism in the organic solar cell, providing a method, which considers
+the impact of all parameters of interest on the same footing within an inexpensive numerical effort, could play an
+essential role. We use here a simple tight-binding model to describe the dissociation of the charge carriers and
+investigate their dependence on the physical parameters of the system. We demonstrate that the quantum yield of the
+cell is subtly controlled by the collective action of the Coulomb interaction of the electron–hole pair, electron–phonon
+coupling, and the geminate recombination of the charge carriers. This approach should help us understand the performance
+of organic solar cells and optimize their efficiency.
